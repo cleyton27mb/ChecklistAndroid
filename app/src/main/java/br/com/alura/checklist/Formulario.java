@@ -9,14 +9,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import br.com.alura.checklist.dao.TarefaDAO;
+import br.com.alura.checklist.model.Tarefa;
+
 public class Formulario extends AppCompatActivity {
+
+    private FormularioHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
+         helper = new FormularioHelper(this);
     }
 
     @Override
@@ -32,7 +40,15 @@ public class Formulario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-             Toast.makeText(Formulario.this, "Tarefa Salva!", Toast.LENGTH_SHORT).show();
+
+            Tarefa tarefa = helper.pegaTarefa();
+                TarefaDAO dao = new TarefaDAO(this);
+                dao.insere(tarefa);
+                dao.close();
+
+
+                Toast.makeText(Formulario.this, "Tarefa "+ tarefa.getNome() + "salva!", Toast.LENGTH_SHORT).show();
+
             finish();
              break;
         }

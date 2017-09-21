@@ -43,4 +43,9 @@ public class Tarefa {
     public void setData(String data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return  getId()+"- " + getNome() +"-" + getTarefa()+ "-" + getData();
+    }
 }
