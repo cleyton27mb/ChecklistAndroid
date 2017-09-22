@@ -65,4 +65,10 @@ public class TarefaDAO extends SQLiteOpenHelper {
 
         return tarefas;
     }
+
+    public void deleta(Tarefa tarefa) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {tarefa.getId().toString()};
+        db.delete("Tarefas", "id = ?", params);
+    }
 }
