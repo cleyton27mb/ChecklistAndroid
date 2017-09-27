@@ -47,6 +47,6 @@ public class Tarefa implements Serializable {
 
     @Override
     public String toString() {
-        return  getId()+"- " + getNome() +"-" + getTarefa()+ "-" + getData();
+        return  getId()+" - " + getNome() +" - " + getTarefa()+ " - " + getData();
     }
 }

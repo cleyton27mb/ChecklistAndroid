@@ -47,10 +47,16 @@ public class Formulario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
+                TarefaDAO dao = new TarefaDAO(this);
 
             Tarefa tarefa = helper.pegaTarefa();
-                TarefaDAO dao = new TarefaDAO(this);
-                dao.insere(tarefa);
+
+                if (tarefa.getId() != null){
+                    dao.altera(tarefa);
+                }else {
+                    dao.insere(tarefa);
+                }
+
                 dao.close();
 
 

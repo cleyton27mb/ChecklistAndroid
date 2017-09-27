@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +38,19 @@ public class TarefaDAO extends SQLiteOpenHelper {
     public void insere(Tarefa tarefa) {
         SQLiteDatabase db = getWritableDatabase();
 
+        ContentValues dados = pegaDadosDaTarefas(tarefa);
+
+
+        db.insert("Tarefas", null, dados);
+    }
+
+    @NonNull
+    private ContentValues pegaDadosDaTarefas(Tarefa tarefa) {
         ContentValues dados = new ContentValues();
         dados.put("nome", tarefa.getNome());
         dados.put("tarefa", tarefa.getTarefa());
         dados.put("data", tarefa.getData());
-
-
-        db.insert("Tarefas", null, dados);
+        return dados;
     }
 
     public List<Tarefa> buscaTarefas() {
@@ -70,5 +77,12 @@ public class TarefaDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[] params = {tarefa.getId().toString()};
         db.delete("Tarefas", "id = ?", params);
+    }
+
+    public void altera(Tarefa tarefa) {
+        SQLiteDatabase db =  getWritableDatabase();
+        ContentValues dados =  pegaDadosDaTarefas(tarefa);
+        String[] params = {tarefa.getId().toString()};
+        db.update("Tarefas", dados, "id = ?", params);
     }
 }
