@@ -26,7 +26,20 @@ public class ListaDeTarefas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_tarefas);
 
-         listaDeTarefas = (ListView) findViewById(R.id.lista_tarefas);
+        listaDeTarefas = (ListView) findViewById(R.id.lista_tarefas);
+
+        listaDeTarefas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int i, long l) {
+                Tarefa tarefa = (Tarefa) listaDeTarefas.getItemAtPosition(i);
+
+                Intent intetVaiProFormulario = new Intent(ListaDeTarefas.this, Formulario.class);
+                intetVaiProFormulario.putExtra("tarefa", tarefa);
+                startActivity(intetVaiProFormulario);
+            }
+        });
+
+
 
         Button novaTarefa = (Button) findViewById(R.id.nova_tarefa);
         novaTarefa.setOnClickListener(new View.OnClickListener() {

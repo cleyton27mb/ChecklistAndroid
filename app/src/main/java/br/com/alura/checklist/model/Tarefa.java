@@ -1,12 +1,13 @@
 package br.com.alura.checklist.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by cleyton on 20/09/17.
  */
 
-public class Tarefa {
+public class Tarefa implements Serializable {
     private Long id;
     private String nome;
     private String tarefa;

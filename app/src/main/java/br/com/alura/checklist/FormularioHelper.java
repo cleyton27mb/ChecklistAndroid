@@ -16,21 +16,28 @@ public class FormularioHelper {
     private final EditText campoTarefa;
     private final EditText campoData;
 
+    private Tarefa tarefa;
 
     public FormularioHelper(Formulario actvity){
         campoNome = (EditText) actvity.findViewById(R.id.formulario_nome);
         campoTarefa = (EditText) actvity.findViewById(R.id.formulario_tarefa);
         campoData = (EditText) actvity.findViewById(R.id.formulario_data);
-
+        tarefa = new Tarefa();
     }
 
     public Tarefa pegaTarefa() {
-        Tarefa tarefa = new Tarefa();
         tarefa.setNome(campoNome.getText().toString());
         tarefa.setTarefa(campoTarefa.getText().toString());
         tarefa.setData(campoData.getText().toString());
 
 
         return tarefa;
+    }
+
+    public void preencheFormulario(Tarefa tarefa) {
+        campoNome.setText(tarefa.getNome());
+        campoTarefa.setText(tarefa.getTarefa());
+        campoData.setText(tarefa.getData());
+        this.tarefa = tarefa;
     }
 }

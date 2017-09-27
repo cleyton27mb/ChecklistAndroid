@@ -24,7 +24,14 @@ public class Formulario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-         helper = new FormularioHelper(this);
+        helper = new FormularioHelper(this);
+         Intent intent = getIntent();
+        Tarefa tarefa = (Tarefa) intent.getSerializableExtra("tarefa");
+        if (tarefa != null){
+            helper.preencheFormulario(tarefa);
+        }
+
+
     }
 
     @Override
